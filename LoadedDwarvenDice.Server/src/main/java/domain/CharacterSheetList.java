@@ -24,12 +24,12 @@ import lombok.AllArgsConstructor;
 public class CharacterSheetList implements Serializable
 {
     @Id @GeneratedValue 
-    String id;
+    Long id;
     
     @OneToMany (mappedBy = "cslist", cascade = CascadeType.ALL,fetch = FetchType.LAZY)
     List<CharacterSheet> characterSheets;
 
-    public CharacterSheetList(String id)
+    public CharacterSheetList(Long id)
     {
         this.id = id;
     }

@@ -26,7 +26,13 @@ import lombok.Data;
 @XmlAccessorType(XmlAccessType.FIELD)
 public class CharacterSheet implements Serializable
 {
+    @Id
+    @GeneratedValue
+    Long id;
 
+    @ManyToOne(optional = false, cascade = CascadeType.PERSIST)
+    CharacterSheetList characterSheetList;
+    
     //---General Information---
     String cName;
     String player;
@@ -118,13 +124,6 @@ public class CharacterSheet implements Serializable
 
     //Input order: Level, SpellsKnown, SpellSaveDC, SpellsPerDay, BonusSpells 
     HashMap<Integer, List<Integer>> spellsKnown;
-
-    @Id
-    @GeneratedValue
-    String id;
-
-    @ManyToOne(optional = false, cascade = CascadeType.PERSIST)
-    CharacterSheetList characterSheetList;
 
     /**
      * TODO: Add Documentation

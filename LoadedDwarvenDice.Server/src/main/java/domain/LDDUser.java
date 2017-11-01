@@ -25,7 +25,7 @@ public class LDDUser implements Serializable
      * TODO: Add encryption god dammit!
      */
     @Id @GeneratedValue
-    String userid;
+    Long userid;
     
     String email;
 
