@@ -11,6 +11,7 @@ import javax.persistence.ManyToOne;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 
@@ -26,43 +27,44 @@ import lombok.Data;
 @XmlAccessorType(XmlAccessType.FIELD)
 public class CharacterSheet implements Serializable
 {
+
     @Id
     @GeneratedValue
     Long id;
 
     @ManyToOne(optional = false, cascade = CascadeType.PERSIST)
     CharacterSheetList characterSheetList;
-    
+
     //---General Information---
-    String cName;
+    String characterName;
     String player;
     String cClass;
-    String cLevel;
-    String hitPoints;
-    String armorClass;
+    String classLevel;
+    String HitPoints;
+    String AC;
     String speed;
     String experience;
 
     //---Character Description---
     String race;
     String alignemnt;
-    String deity;
+    String religion;
     String cSize;
     String age;
     String gender;
     String height;
     String weight;
-    String eyes;
+    String eye;
     String hair;
     String skin;
 
     //---Abilities---
-    String str;
-    String dex;
-    String con;
-    String intelligence;
-    String wis;
-    String cha;
+    String Strength;
+    String Dexterity;
+    String Constitution;
+    String Intelligence;
+    String Wisdom;
+    String Charisma;
     String baseAttackBonus;
     String spellResistance;
     String grapple;
@@ -73,8 +75,50 @@ public class CharacterSheet implements Serializable
     String willBase;
 
     //---Skills---
-    //Input order: SkillName,KeyAbility,AbilityMod,Ranks,Misc  
-    HashMap<List<String>, List<String>> skills;
+    String Appraise;
+    String Balance;
+    String Bluff;
+    String Climb;
+    String Concentration;
+    String Craft;
+    String DecipherScript;
+    String Diplomacy;
+    String DisableDevice;
+    String Disguise;
+    String EscapeArtist;
+    String Forgery;
+    String GatherInformation;
+    String HandleAnimal;
+    String Heal;
+    String Hide;
+    String Intimidate;
+    String Jump;
+    String KnowledgeArcana;
+    String KnowledgeArchitecture;
+    String KnowledgeDungeoneering;
+    String KnowledgeGeography;
+    String KnowledgeHistory;
+    String KnowledgeLocal;
+    String KnowledgeNature;
+    String KnowledgeNobility;
+    String KnowledgeReligion;
+    String KnowledgeThePlanes;
+    String Listen;
+    String MoveSilently;
+    String OpenLock;
+    String Perform;
+    String Profession;
+    String Ride;
+    String sSearch;
+    String SenseMotive;
+    String SleightOfHand;
+    String Spellcraft;
+    String Spot;
+    String Survival;
+    String Swim;
+    String Tumble;
+    String UseMagicDevice;
+    String UseRope;
 
     //---Attack---
     //Input order:
@@ -129,9 +173,7 @@ public class CharacterSheet implements Serializable
     {
     }
 
-
     /**
-     * TODO: Add Documentation
      * 
      * @param cName
      * @param player
@@ -164,7 +206,50 @@ public class CharacterSheet implements Serializable
      * @param fortitudeBase
      * @param reflexBase
      * @param willBase
-     * @param skills
+     * @param Appraise
+     * @param Balance
+     * @param Bluff
+     * @param Climb
+     * @param Concentration
+     * @param Craft
+     * @param DecipherScript
+     * @param Diplomacy
+     * @param DisableDevice
+     * @param Disguise
+     * @param EscapeArtist
+     * @param Forgery
+     * @param GatherInformation
+     * @param HandleAnimal
+     * @param Heal
+     * @param Hide
+     * @param Intimidate
+     * @param Jump
+     * @param KnowledgeArcana
+     * @param KnowledgeArchitecture
+     * @param KnowledgeDungeoneering
+     * @param KnowledgeGeography
+     * @param KnowledgeHistory
+     * @param KnowledgeLocal
+     * @param KnowledgeNature
+     * @param KnowledgeNobility
+     * @param KnowledgeReligion
+     * @param KnowledgeThePlanes
+     * @param Listen
+     * @param MoveSilently
+     * @param OpenLock
+     * @param Perform
+     * @param Profession
+     * @param Ride
+     * @param sSearch
+     * @param SenseMotive
+     * @param SleightOfHand
+     * @param Spellcraft
+     * @param Spot
+     * @param Survival
+     * @param Swim
+     * @param Tumble
+     * @param UseMagicDevice
+     * @param UseRope
      * @param attack
      * @param armourProtectiveItem
      * @param shieldProtectiveItem
@@ -222,7 +307,50 @@ public class CharacterSheet implements Serializable
             String fortitudeBase,
             String reflexBase,
             String willBase,
-            HashMap<List<String>, List<String>> skills,
+            String Appraise,
+            String Balance,
+            String Bluff,
+            String Climb,
+            String Concentration,
+            String Craft,
+            String DecipherScript,
+            String Diplomacy,
+            String DisableDevice,
+            String Disguise,
+            String EscapeArtist,
+            String Forgery,
+            String GatherInformation,
+            String HandleAnimal,
+            String Heal,
+            String Hide,
+            String Intimidate,
+            String Jump,
+            String KnowledgeArcana,
+            String KnowledgeArchitecture,
+            String KnowledgeDungeoneering,
+            String KnowledgeGeography,
+            String KnowledgeHistory,
+            String KnowledgeLocal,
+            String KnowledgeNature,
+            String KnowledgeNobility,
+            String KnowledgeReligion,
+            String KnowledgeThePlanes,
+            String Listen,
+            String MoveSilently,
+            String OpenLock,
+            String Perform,
+            String Profession,
+            String Ride,
+            String sSearch,
+            String SenseMotive,
+            String SleightOfHand,
+            String Spellcraft,
+            String Spot,
+            String Survival,
+            String Swim,
+            String Tumble,
+            String UseMagicDevice,
+            String UseRope,
             HashMap<String, List<String>> attack,
             HashMap<String, List<String>> armourProtectiveItem,
             HashMap<String, List<String>> shieldProtectiveItem,
@@ -248,37 +376,82 @@ public class CharacterSheet implements Serializable
             String arcaneSpellFailure,
             HashMap<String, List<String>> spellsKnown)
     {
-        this.cName = cName;
+        this.characterName = cName;
         this.player = player;
         this.cClass = cClass;
-        this.cLevel = level;
-        this.hitPoints = hitPoints;
-        this.armorClass = armorClass;
+        this.classLevel = level;
+        this.HitPoints = hitPoints;
+        this.AC = armorClass;
         this.speed = speed;
         this.experience = experience;
         this.race = race;
         this.alignemnt = alignemnt;
-        this.deity = deity;
+        this.religion = deity;
         this.cSize = size;
         this.age = age;
         this.gender = gender;
         this.height = height;
         this.weight = weight;
-        this.eyes = eyes;
+        this.eye = eyes;
         this.hair = hair;
         this.skin = skin;
-        this.str = str;
-        this.dex = dex;
-        this.con = con;
-        this.intelligence = intelligence;
-        this.wis = wis;
-        this.cha = cha;
+        this.Strength = str;
+        this.Dexterity = dex;
+        this.Constitution = con;
+        this.Intelligence = intelligence;
+        this.Wisdom = wis;
+        this.Charisma = cha;
         this.baseAttackBonus = baseAttackBonus;
         this.spellResistance = spellResistance;
         this.grapple = grapple;
         this.fortitudeBase = fortitudeBase;
         this.reflexBase = reflexBase;
         this.willBase = willBase;
+
+        this.Appraise = Appraise;
+        this.Balance = Balance;
+        this.Bluff = Bluff;
+        this.Climb = Climb;
+        this.Concentration = Concentration;
+        this.Craft = Craft;
+        this.DecipherScript = DecipherScript;
+        this.Diplomacy = Diplomacy;
+        this.DisableDevice = DisableDevice;
+        this.Disguise = Disguise;
+        this.EscapeArtist = EscapeArtist;
+        this.Forgery = Forgery;
+        this.GatherInformation = GatherInformation;
+        this.HandleAnimal = HandleAnimal;
+        this.Heal = Heal;
+        this.Hide = Hide;
+        this.Intimidate = Intimidate;
+        this.Jump = Jump;
+        this.KnowledgeArcana = KnowledgeArcana;
+        this.KnowledgeArchitecture = KnowledgeArchitecture;
+        this.KnowledgeDungeoneering = KnowledgeDungeoneering;
+        this.KnowledgeGeography = KnowledgeGeography;
+        this.KnowledgeHistory = KnowledgeHistory;
+        this.KnowledgeLocal = KnowledgeLocal;
+        this.KnowledgeNature = KnowledgeNature;
+        this.KnowledgeNobility = KnowledgeNobility;
+        this.KnowledgeReligion = KnowledgeReligion;
+        this.KnowledgeThePlanes = KnowledgeThePlanes;
+        this.Listen = Listen;
+        this.MoveSilently = MoveSilently;
+        this.OpenLock = OpenLock;
+        this.Perform = Perform;
+        this.Profession = Profession;
+        this.Ride = Ride;
+        this.sSearch = sSearch;
+        this.SenseMotive = SenseMotive;
+        this.SleightOfHand = SleightOfHand;
+        this.Spellcraft = Spellcraft;
+        this.Spot = Spot;
+        this.Survival = Survival;
+        this.Swim = Swim;
+        this.Tumble = Tumble;
+        this.UseMagicDevice = UseMagicDevice;
+        this.UseRope = UseRope;
 
         this.attack = attack;
         this.armourProtectiveItem = armourProtectiveItem;
@@ -305,7 +478,6 @@ public class CharacterSheet implements Serializable
         this.arcaneSpellFailure = arcaneSpellFailure;
         this.spellsKnown = spellsKnown;
 
-        this.skills = skills;
         this.money = money;
 
     }
