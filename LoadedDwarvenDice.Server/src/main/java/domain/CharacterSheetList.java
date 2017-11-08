@@ -26,8 +26,12 @@ public class CharacterSheetList implements Serializable
     @Id @GeneratedValue 
     Long id;
     
-    @OneToMany (mappedBy = "cslist", cascade = CascadeType.ALL,fetch = FetchType.LAZY)
+    @OneToMany (mappedBy = "characterSheetList", cascade = CascadeType.ALL,fetch = FetchType.LAZY)
     List<CharacterSheet> characterSheets;
+
+    public CharacterSheetList()
+    {
+    }
 
     public CharacterSheetList(Long id)
     {

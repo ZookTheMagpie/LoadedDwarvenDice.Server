@@ -37,44 +37,44 @@ public class CharacterSheet implements Serializable
     String cName;
     String player;
     String cClass;
-    Integer level;
-    Integer hitPoints;
-    Integer armorClass;
-    Integer speed;
-    Integer experience;
+    String cLevel;
+    String hitPoints;
+    String armorClass;
+    String speed;
+    String experience;
 
     //---Character Description---
     String race;
     String alignemnt;
     String deity;
-    String size;
-    Integer age;
+    String cSize;
+    String age;
     String gender;
-    Integer height;
-    Integer weight;
+    String height;
+    String weight;
     String eyes;
     String hair;
     String skin;
 
     //---Abilities---
-    Integer str;
-    Integer dex;
-    Integer con;
-    Integer intelligence;
-    Integer wis;
-    Integer cha;
-    Integer baseAttackBonus;
-    Integer spellResistance;
-    Integer grapple;
+    String str;
+    String dex;
+    String con;
+    String intelligence;
+    String wis;
+    String cha;
+    String baseAttackBonus;
+    String spellResistance;
+    String grapple;
 
     //---Saving Throws---
-    Integer fortitudeBase;
-    Integer reflexBase;
-    Integer willBase;
+    String fortitudeBase;
+    String reflexBase;
+    String willBase;
 
     //---Skills---
     //Input order: SkillName,KeyAbility,AbilityMod,Ranks,Misc  
-    HashMap<List<String>, List<Integer>> skills;
+    HashMap<List<String>, List<String>> skills;
 
     //---Attack---
     //Input order:
@@ -92,9 +92,9 @@ public class CharacterSheet implements Serializable
 
     //---Other possessions---
     //Input order: ItemName, Amount, Weight
-    HashMap<String, List<Integer>> inventory;
+    HashMap<String, List<String>> inventory;
     //Input order: Valuta, Amount
-    HashMap<String, Integer> money;
+    HashMap<String, String> money;
 
     //---Feats---
     List<String> feats;
@@ -119,11 +119,16 @@ public class CharacterSheet implements Serializable
     List<String> level8Spells;
     List<String> level9Spells;
 
-    Integer spellSave;
-    Integer arcaneSpellFailure;
+    String spellSave;
+    String arcaneSpellFailure;
 
     //Input order: Level, SpellsKnown, SpellSaveDC, SpellsPerDay, BonusSpells 
-    HashMap<Integer, List<Integer>> spellsKnown;
+    HashMap<String, List<String>> spellsKnown;
+
+    public CharacterSheet()
+    {
+    }
+
 
     /**
      * TODO: Add Documentation
@@ -189,42 +194,42 @@ public class CharacterSheet implements Serializable
             String cName,
             String player,
             String cClass,
-            Integer level,
-            Integer hitPoints,
-            Integer armorClass,
-            Integer speed,
-            Integer experience,
+            String level,
+            String hitPoints,
+            String armorClass,
+            String speed,
+            String experience,
             String race,
             String alignemnt,
             String deity,
             String size,
-            Integer age,
+            String age,
             String gender,
-            Integer height,
-            Integer weight,
+            String height,
+            String weight,
             String eyes,
             String hair,
             String skin,
-            Integer str,
-            Integer dex,
-            Integer con,
-            Integer intelligence,
-            Integer wis,
-            Integer cha,
-            Integer baseAttackBonus,
-            Integer spellResistance,
-            Integer grapple,
-            Integer fortitudeBase,
-            Integer reflexBase,
-            Integer willBase,
-            HashMap<List<String>, List<Integer>> skills,
+            String str,
+            String dex,
+            String con,
+            String intelligence,
+            String wis,
+            String cha,
+            String baseAttackBonus,
+            String spellResistance,
+            String grapple,
+            String fortitudeBase,
+            String reflexBase,
+            String willBase,
+            HashMap<List<String>, List<String>> skills,
             HashMap<String, List<String>> attack,
             HashMap<String, List<String>> armourProtectiveItem,
             HashMap<String, List<String>> shieldProtectiveItem,
             HashMap<String, List<String>> protectiveItem1,
             HashMap<String, List<String>> protectiveItem2,
-            HashMap<String, List<Integer>> inventory,
-            HashMap<String, Integer> money,
+            HashMap<String, List<String>> inventory,
+            HashMap<String, String> money,
             List<String> feats,
             List<String> specialAbilities,
             List<String> languages,
@@ -239,14 +244,14 @@ public class CharacterSheet implements Serializable
             List<String> level7Spells,
             List<String> level8Spells,
             List<String> level9Spells,
-            Integer spellSave,
-            Integer arcaneSpellFailure,
-            HashMap<Integer, List<Integer>> spellsKnown)
+            String spellSave,
+            String arcaneSpellFailure,
+            HashMap<String, List<String>> spellsKnown)
     {
         this.cName = cName;
         this.player = player;
         this.cClass = cClass;
-        this.level = level;
+        this.cLevel = level;
         this.hitPoints = hitPoints;
         this.armorClass = armorClass;
         this.speed = speed;
@@ -254,7 +259,7 @@ public class CharacterSheet implements Serializable
         this.race = race;
         this.alignemnt = alignemnt;
         this.deity = deity;
-        this.size = size;
+        this.cSize = size;
         this.age = age;
         this.gender = gender;
         this.height = height;
