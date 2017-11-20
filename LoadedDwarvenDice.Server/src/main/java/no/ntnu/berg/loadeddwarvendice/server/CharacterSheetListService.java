@@ -15,6 +15,7 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+import java.lang.reflect.*;
 
 /**
  * TODO: Add documentation
@@ -57,20 +58,28 @@ public class CharacterSheetListService
     
     @POST
     @Path("add")
-    public Response addCharacterSheet(@QueryParam("name") Long id, CharacterSheet characterSheet)
+    public Response addCharacterSheet(@QueryParam("name") Long id, String valueID, String value) throws IllegalAccessException, IllegalArgumentException, NoSuchMethodException, InvocationTargetException
     {
+       
         if (id != null) 
         {
+            CharacterSheet cs; 
+            
             CharacterSheetList csl = em.find(CharacterSheetList.class, id);
             if (csl == null) 
             {
-                csl = new CharacterSheetList(id);
-                em.persist(csl);
+               cs = new CharacterSheet(id);
+            } else
+            {
+               cs = getCharacterSheet(id);
             }
-            characterSheet.setCharacterSheetList(csl);
-            em.persist(characterSheet);
             
-            return Response.ok(characterSheet).build();
+            String setType = "set" + valueID;
+            
+            Method setCall = cs.getClass().getMethod(setType, String.class);
+            setCall.invoke(cs, value);
+              
+            return Response.ok(cs).build();
         } else 
         {
             return Response.noContent().build();

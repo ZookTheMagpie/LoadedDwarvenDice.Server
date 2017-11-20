@@ -1,6 +1,7 @@
 package domain;
 
 import java.io.Serializable;
+import static java.lang.Math.toIntExact;
 import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.Entity;
@@ -30,8 +31,8 @@ import lombok.AllArgsConstructor;
     @NamedQuery(name = CharacterSheetList.QUERY_FINDALL, query = "SELECT csl FROM CharacterSheetList csl")})
 public class CharacterSheetList implements Serializable
 {
-
     public static final String QUERY_FINDALL = "findAll";
+
     @Id
     @GeneratedValue
     Long id;
@@ -54,5 +55,13 @@ public class CharacterSheetList implements Serializable
             characterSheets = new ArrayList<>();
         }
         return characterSheets;
+    }
+    
+    
+        public CharacterSheet getCharacterSheet(Long id)
+    {
+        int csID = toIntExact(id);
+        
+        return characterSheets.get(csID);
     }
 }
