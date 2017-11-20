@@ -85,4 +85,12 @@ public class CharacterSheetListService
             return Response.noContent().build();
         }
     }
+
+    private CharacterSheet getCharacterSheet(Long id)
+    {
+        CharacterSheet result; 
+        TypedQuery<CharacterSheet> q = em.createQuery("SELECT cs FROM CharacterSheet cs WHERE cs.characterSheetList.id = :id", CharacterSheet.class);
+        result = q.setParameter("id", id).getSingleResult();
+        return result;
+    }
 }
