@@ -40,6 +40,7 @@ public class CharacterSheetListService
     {
         List<CharacterSheet> result = null;
         if (name != null) {
+            //Is there supposed to be a ":" before the id at the end?
             TypedQuery<CharacterSheet> q = em.createQuery("SELECT cs FROM CharacterSheet cs WHERE cs.characterSheetList.id = :id",
                     CharacterSheet.class);
             result = q.setParameter("id", name).getResultList();
@@ -59,6 +60,9 @@ public class CharacterSheetListService
     @Path("add")
     public Response addCharacterSheet(@QueryParam("name") Long id, CharacterSheet characterSheet)
     {
+        //The problem we are having is that id is null for some reason
+        //primitive long can't be null, and needs to be checked for long != 0
+        //the wrapper class Long can be null
         if (id != null) 
         {
             CharacterSheetList csl = em.find(CharacterSheetList.class, id);
