@@ -169,10 +169,6 @@ public class CharacterSheet implements Serializable
     //Input order: Level, SpellsKnown, SpellSaveDC, SpellsPerDay, BonusSpells 
     HashMap<String, List<String>> spellsKnown;
 
-    public CharacterSheet()
-    {
-    }
-
     /**
      * 
      * @param cName
