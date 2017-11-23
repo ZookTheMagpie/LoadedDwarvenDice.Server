@@ -39,10 +39,6 @@ public class CharacterSheetList implements Serializable
     @OneToMany(mappedBy = "characterSheetList", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     List<CharacterSheet> characterSheets;
 
-    public CharacterSheetList()
-    {
-    }
-
     public CharacterSheetList(Long id)
     {
         this.id = id;
