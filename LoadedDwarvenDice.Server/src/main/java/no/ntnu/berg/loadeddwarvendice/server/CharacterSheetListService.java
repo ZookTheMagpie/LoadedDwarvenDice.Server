@@ -56,6 +56,7 @@ public class CharacterSheetListService
     }
     
     
+    //don't think CharcterSheet should be in the parameters
     @POST
     @Path("add")
     public Response addCharacterSheet(@QueryParam("name") Long id, CharacterSheet characterSheet)
