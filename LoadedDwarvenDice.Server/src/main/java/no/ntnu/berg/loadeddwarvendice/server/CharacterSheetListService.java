@@ -44,7 +44,7 @@ public class CharacterSheetListService
     {
         List<CharacterSheet> result = null;
         if (name != null) {
-            TypedQuery<CharacterSheet> q = em.createQuery("SELECT cs FROM CharacterSheet cs WHERE cs.characterSheetList.id = :id",
+            TypedQuery<CharacterSheet> q = em.createQuery("SELECT cs FROM CharacterSheet cs WHERE cs.characterSheetList.id = id",
                     CharacterSheet.class);
             result = q.setParameter("id", name).getResultList();
         }
@@ -78,7 +78,7 @@ public class CharacterSheetListService
                     cs = new CharacterSheet(id);
                 } else
                 {
-                    TypedQuery<CharacterSheet> q = em.createQuery("SELECT cs FROM CharacterSheet cs WHERE cs.characterSheetList.id = :id", CharacterSheet.class);
+                    TypedQuery<CharacterSheet> q = em.createQuery("SELECT cs FROM CharacterSheet cs WHERE cs.characterSheetList.id = id", CharacterSheet.class);
                     q.setParameter("id", id).getSingleResult();
                     
                     cs = (CharacterSheet) q;
