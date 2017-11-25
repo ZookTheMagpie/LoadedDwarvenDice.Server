@@ -57,13 +57,19 @@ public class CharacterSheetListService
     {
         return em.createNamedQuery(CharacterSheetList.QUERY_FINDALL, CharacterSheetList.class).getResultList();
     }
-
+/**
+ * 
+ * @param id
+ * @param valueID
+ * @param value
+ * @return 
+ */
     @POST
     @Path("add")
-    public Response addCharacterSheet(@QueryParam("name") Long id, @QueryParam ("valueID")String valueID, @QueryParam ("value")String value)
+    public Response addCharacterSheet(@QueryParam("name") int id, @QueryParam ("valueID")String valueID, @QueryParam ("value")String value)
     {
 
-        if (id != null) {
+        if (id != 0) {
             try {
                 CharacterSheet cs;
                 

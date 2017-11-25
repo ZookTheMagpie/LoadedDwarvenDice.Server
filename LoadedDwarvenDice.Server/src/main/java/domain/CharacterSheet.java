@@ -27,7 +27,7 @@ public class CharacterSheet implements Serializable
 {
 
     @Id
-    Long id;
+    int id;
 
     @ManyToOne(optional = false, cascade = CascadeType.PERSIST)
     CharacterSheetList characterSheetList;
@@ -166,7 +166,7 @@ public class CharacterSheet implements Serializable
     //Input order: Level, SpellsKnown, SpellSaveDC, SpellsPerDay, BonusSpells 
     HashMap<String, List<String>> spellsKnown;
 
-    public CharacterSheet(Long id)
+    public CharacterSheet(int id)
     {
         this.id = id;
     }
