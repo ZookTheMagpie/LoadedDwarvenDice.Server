@@ -170,6 +170,8 @@ public class CharacterSheet implements Serializable
     {
         this.id = id;
     }
-
     
+    public CharacterSheet()
+    {
+    } 
 }
