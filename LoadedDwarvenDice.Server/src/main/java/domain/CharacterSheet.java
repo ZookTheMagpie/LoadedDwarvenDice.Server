@@ -27,10 +27,11 @@ import lombok.Data;
 @XmlAccessorType(XmlAccessType.FIELD)
 public class CharacterSheet implements Serializable
 {
+    
 
     @Id
     @GeneratedValue
-    Long id;
+    int id;
 
     @ManyToOne(optional = false, cascade = CascadeType.PERSIST)
     CharacterSheetList characterSheetList;
@@ -168,6 +169,7 @@ public class CharacterSheet implements Serializable
 
     //Input order: Level, SpellsKnown, SpellSaveDC, SpellsPerDay, BonusSpells 
     HashMap<String, List<String>> spellsKnown;
+    
 
     /**
      * 

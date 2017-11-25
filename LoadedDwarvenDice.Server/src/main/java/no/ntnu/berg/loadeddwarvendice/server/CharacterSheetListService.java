@@ -40,8 +40,8 @@ public class CharacterSheetListService
     {
         List<CharacterSheet> result = null;
         if (name != null) {
-            //Is there supposed to be a ":" before the id at the end?
-            TypedQuery<CharacterSheet> q = em.createQuery("SELECT cs FROM CharacterSheet cs WHERE cs.characterSheetList.id = :id",
+            
+            TypedQuery<CharacterSheet> q = em.createQuery("SELECT cs FROM CharacterSheet cs WHERE cs.characterSheetList.id = id",
                     CharacterSheet.class);
             result = q.setParameter("id", name).getResultList();
         }
@@ -56,15 +56,13 @@ public class CharacterSheetListService
     }
     
     
-    //don't think CharcterSheet should be in the parameters
+    
     @POST
     @Path("add")
-    public Response addCharacterSheet(@QueryParam("name") Long id, CharacterSheet characterSheet)
+    public Response addCharacterSheet(@QueryParam("name") int id)
     {
-        //The problem we are having is that id is null for some reason
-        //primitive long can't be null, and needs to be checked for long != 0
-        //the wrapper class Long can be null
-        if (id != null) 
+        
+        if (id != 0) 
         {
             CharacterSheetList csl = em.find(CharacterSheetList.class, id);
             if (csl == null) 
@@ -72,10 +70,13 @@ public class CharacterSheetListService
                 csl = new CharacterSheetList(id);
                 em.persist(csl);
             }
-            characterSheet.setCharacterSheetList(csl);
-            em.persist(characterSheet);
             
-            return Response.ok(characterSheet).build();
+            
+            
+            //characterSheet.setCharacterSheetList(csl);
+            //em.persist(characterSheet);
+            
+            return Response.ok(csl).build();
         } else 
         {
             return Response.noContent().build();
