@@ -16,6 +16,9 @@ import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import java.lang.reflect.*;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import static javax.management.Query.*;
 
 /**
  * TODO: Add documentation
@@ -54,43 +57,41 @@ public class CharacterSheetListService
     {
         return em.createNamedQuery(CharacterSheetList.QUERY_FINDALL, CharacterSheetList.class).getResultList();
     }
-    
-    
+
     @POST
     @Path("add")
-    public Response addCharacterSheet(@QueryParam("name") Long id, String valueID, String value) throws IllegalAccessException, IllegalArgumentException, NoSuchMethodException, InvocationTargetException
+    public Response addCharacterSheet(@QueryParam("name") Long id, @QueryParam ("valueID")String valueID, @QueryParam ("value")String value)
     {
-       
-        if (id != null) 
-        {
-            CharacterSheet cs; 
-            
-            CharacterSheetList csl = em.find(CharacterSheetList.class, id);
-            if (csl == null) 
+
+        if (id != null) {
+            try {
+                CharacterSheet cs;
+                
+                CharacterSheetList csl = em.find(CharacterSheetList.class, id);
+                if (csl == null) {
+                    cs = new CharacterSheet(id);
+                } else
+                {
+                    TypedQuery<CharacterSheet> q = em.createQuery("SELECT cs FROM CharacterSheet cs WHERE cs.characterSheetList.id = :id", CharacterSheet.class);
+                    q.setParameter("id", id).getSingleResult();
+                    
+                    cs = (CharacterSheet) q;
+                }
+                
+                String setType = "set" + valueID;
+                
+                Method setCall = cs.getClass().getMethod(setType, String.class);
+                setCall.invoke(cs, value);
+                
+                return Response.ok(cs).build();
+            } catch (NoSuchMethodException | SecurityException | IllegalAccessException | IllegalArgumentException | InvocationTargetException ex) 
             {
-               cs = new CharacterSheet(id);
-            } else
-            {
-               cs = getCharacterSheet(id);
+                Logger.getLogger(CharacterSheetListService.class.getName()).log(Level.SEVERE, null, ex);
             }
-            
-            String setType = "set" + valueID;
-            
-            Method setCall = cs.getClass().getMethod(setType, String.class);
-            setCall.invoke(cs, value);
-              
-            return Response.ok(cs).build();
-        } else 
-        {
+        } else {
             return Response.noContent().build();
         }
+        return null;
     }
 
-    private CharacterSheet getCharacterSheet(Long id)
-    {
-        CharacterSheet result; 
-        TypedQuery<CharacterSheet> q = em.createQuery("SELECT cs FROM CharacterSheet cs WHERE cs.characterSheetList.id = :id", CharacterSheet.class);
-        result = q.setParameter("id", id).getSingleResult();
-        return result;
-    }
 }
