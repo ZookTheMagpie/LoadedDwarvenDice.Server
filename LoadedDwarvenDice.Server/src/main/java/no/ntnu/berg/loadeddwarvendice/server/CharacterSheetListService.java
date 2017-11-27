@@ -43,13 +43,13 @@ public class CharacterSheetListService
      * @return
      */
     @GET
-    public List<CharacterSheet> getCharacterSheets(@QueryParam("name") String name)
+    public List<CharacterSheet> getCharacterSheets(@QueryParam("name") Integer id)
     {
         List<CharacterSheet> result = null;
-        if (name != null) {
+        if (id != null) {
             TypedQuery<CharacterSheet> q = em.createQuery("SELECT cs FROM CharacterSheet cs WHERE cs.characterSheetList.id = :id",
                     CharacterSheet.class);
-            result = q.setParameter("id", name).getResultList();
+            result = q.setParameter("id", id).getResultList();
         }
         return result != null ? result : Collections.EMPTY_LIST;
     }
