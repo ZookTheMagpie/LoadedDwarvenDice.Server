@@ -35,7 +35,7 @@ public class CharacterSheetList implements Serializable
 
     @Id
     @GeneratedValue
-    int id;
+    Integer id;
 
     @OneToMany(mappedBy = "characterSheetList", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     List<CharacterSheet> characterSheets;

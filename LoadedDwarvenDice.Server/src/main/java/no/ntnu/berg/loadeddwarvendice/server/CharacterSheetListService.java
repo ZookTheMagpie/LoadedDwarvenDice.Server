@@ -71,9 +71,9 @@ public class CharacterSheetListService
     @POST
     @Path("add")
     @Consumes(MediaType.APPLICATION_JSON)
-    public Response addCharacterSheet(@QueryParam("name") int id, CharacterSheetIn st)
+    public Response addCharacterSheet(@QueryParam("name") Integer id, CharacterSheetIn st)
     {
-        if (id != 0) {
+        if (id != null) {
             try {
                 CharacterSheet cs;
                 

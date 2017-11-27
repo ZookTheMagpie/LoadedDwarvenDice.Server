@@ -27,7 +27,7 @@ public class CharacterSheet implements Serializable
 {
 
     @Id
-    int id;
+    Integer id;
 
     @ManyToOne(optional = false, cascade = CascadeType.PERSIST)
     CharacterSheetList characterSheetList;
