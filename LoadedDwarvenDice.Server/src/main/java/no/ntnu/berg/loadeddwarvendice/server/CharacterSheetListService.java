@@ -19,6 +19,9 @@ import java.lang.reflect.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import static javax.management.Query.*;
+import javax.xml.bind.annotation.XmlRootElement;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 /**
  * TODO: Add documentation
@@ -44,7 +47,7 @@ public class CharacterSheetListService
     {
         List<CharacterSheet> result = null;
         if (name != null) {
-            TypedQuery<CharacterSheet> q = em.createQuery("SELECT cs FROM CharacterSheet cs WHERE cs.characterSheetList.id = id",
+            TypedQuery<CharacterSheet> q = em.createQuery("SELECT cs FROM CharacterSheet cs WHERE cs.characterSheetList.id = :id",
                     CharacterSheet.class);
             result = q.setParameter("id", name).getResultList();
         }
@@ -60,15 +63,16 @@ public class CharacterSheetListService
 /**
  * 
  * @param id
+     * @param st
  * @param valueID
  * @param value
  * @return 
  */
     @POST
     @Path("add")
-    public Response addCharacterSheet(@QueryParam("name") int id, @QueryParam ("valueID")String valueID, @QueryParam ("value")String value)
+    @Consumes(MediaType.APPLICATION_JSON)
+    public Response addCharacterSheet(@QueryParam("name") int id, CharacterSheetIn st)
     {
-
         if (id != 0) {
             try {
                 CharacterSheet cs;
@@ -78,16 +82,16 @@ public class CharacterSheetListService
                     cs = new CharacterSheet(id);
                 } else
                 {
-                    TypedQuery<CharacterSheet> q = em.createQuery("SELECT cs FROM CharacterSheet cs WHERE cs.characterSheetList.id = id", CharacterSheet.class);
+                    TypedQuery<CharacterSheet> q = em.createQuery("SELECT cs FROM CharacterSheet cs WHERE cs.characterSheetList.id = :id", CharacterSheet.class);
                     q.setParameter("id", id).getSingleResult();
                     
                     cs = (CharacterSheet) q;
                 }
                 
-                String setType = "set" + valueID;
+                String setType = "set" + st.valueID;
                 
                 Method setCall = cs.getClass().getMethod(setType, String.class);
-                setCall.invoke(cs, value);
+                setCall.invoke(cs, st.value);
                 
                 return Response.ok(cs).build();
             } catch (NoSuchMethodException | SecurityException | IllegalAccessException | IllegalArgumentException | InvocationTargetException ex) 
@@ -100,4 +104,11 @@ public class CharacterSheetListService
         return null;
     }
 
+    
+    @Data @NoArgsConstructor
+    @XmlRootElement
+    public static class CharacterSheetIn {
+        String valueID;
+        String value; 
+    }
 }
