@@ -73,6 +73,7 @@ public class CharacterSheetListService
     @Consumes(MediaType.APPLICATION_JSON)
     public Response addCharacterSheet(@QueryParam("name") Integer id, CharacterSheetIn st)
     {
+        Response response = null;
         if (id != null) {
             try {
                 CharacterSheet cs;
@@ -93,15 +94,15 @@ public class CharacterSheetListService
                 Method setCall = cs.getClass().getMethod(setType, String.class);
                 setCall.invoke(cs, st.value);
                 
-                return Response.ok(cs).build();
+                response = response.ok(cs).build();
             } catch (NoSuchMethodException | SecurityException | IllegalAccessException | IllegalArgumentException | InvocationTargetException ex) 
             {
                 Logger.getLogger(CharacterSheetListService.class.getName()).log(Level.SEVERE, null, ex);
             }
         } else {
-            return Response.noContent().build();
+            response = response.noContent().build();
         }
-        return null;
+        return response;
     }
 
     
